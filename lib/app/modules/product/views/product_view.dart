@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_api_integration_practice/app/modules/product/controllers/cart_controller.dart';
 
 import '../controllers/product_controller.dart';
 
 class ProductView extends StatelessWidget {
   final ProductController controller = Get.put(ProductController());
+  final CartController cartController = Get.put(CartController());
 
   ProductView({super.key});
 
@@ -70,6 +72,7 @@ class ProductView extends StatelessWidget {
                                       if (product.quantity > 0) {
                                         product.quantity.value =
                                             (product.quantity - 1).value;
+                                        cartController.removeFromCart(product);
                                       } else {
                                         product.quantity.value = 0;
                                       }
@@ -90,6 +93,7 @@ class ProductView extends StatelessWidget {
                                     onPressed: () {
                                       product.quantity.value =
                                           (product.quantity + 1).value;
+                                      cartController.addToCart(product);
                                     },
                                     icon: Icon(Icons.add)),
                               ],
@@ -109,8 +113,18 @@ class ProductView extends StatelessWidget {
                   color: Colors.blue, borderRadius: BorderRadius.circular(8)),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    elevation: 0, backgroundColor: Colors.transparent),
-                onPressed: () {},
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        8), // Match the Container's border radius
+                  ),
+                ),
+                onPressed: () {
+                  cartController.calculateTotal();
+                  Get.toNamed('/cart_view', arguments: controller.products);
+                },
                 child: Text(
                   'Check Out',
                   style: TextStyle(color: Colors.black, fontSize: 18),

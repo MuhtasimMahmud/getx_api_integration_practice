@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_api_integration_practice/app/modules/product/controllers/cart_controller.dart';
 import 'package:getx_api_integration_practice/app/modules/product/models/product_model.dart';
 
 class ProductController extends GetxController {
@@ -27,7 +28,6 @@ class ProductController extends GetxController {
       Colors.yellow.shade100,
       Colors.purple.shade100,
     ];
-
     return colors[index % colors.length];
   }
 }

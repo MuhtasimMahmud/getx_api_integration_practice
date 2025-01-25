@@ -23,8 +23,8 @@ class CartView extends StatelessWidget {
                 final item = cartController.cartItems[index];
 
                 return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text('\$${item.price.toString()}'),
+                  title: Text('${item.name} x ${item.quantity.value}'),
+                  subtitle: Text('${item.price}'),
                   trailing: IconButton(
                     icon: Icon(Icons.remove_circle_outline),
                     onPressed: () {
