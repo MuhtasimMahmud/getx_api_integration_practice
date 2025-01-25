@@ -24,7 +24,9 @@ class CartView extends StatelessWidget {
 
                 return ListTile(
                   title: Text('${item.name} x ${item.quantity.value}'),
-                  subtitle: Text('${item.price}'),
+                  subtitle: Obx(() {
+                    return Text('${item.price * item.quantity.value}');
+                  }),
                   trailing: IconButton(
                     icon: Icon(Icons.remove_circle_outline),
                     onPressed: () {

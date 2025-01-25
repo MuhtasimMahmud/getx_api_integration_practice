@@ -122,7 +122,6 @@ class ProductView extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  cartController.calculateTotal();
                   Get.toNamed('/cart_view', arguments: controller.products);
                 },
                 child: Text(

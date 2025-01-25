@@ -16,14 +16,13 @@ class CartController extends GetxController {
   }
 
   void addToCart(ProductModel product) {
-    int indexIfExists = existInTheCart(product);
+    int indexOfTheItem = existInTheCart(product);
 
-    if (indexIfExists != -1) {
-      cartItems[indexIfExists].quantity + 1;
+    if (indexOfTheItem != -1) {
+      cartItems[indexOfTheItem].quantity + 1;
     } else {
       cartItems.add(product);
     }
-    calculateTotal();
   }
 
   void removeFromCart(ProductModel product) {
@@ -35,10 +34,7 @@ class CartController extends GetxController {
         cartItems.remove(cartItems[indexIfExists]);
       }
     }
-    calculateTotal();
   }
 
-  void calculateTotal() {
-    totalAmount.value = cartItems.fold(0, (sum, item) => sum + item.price);
-  }
+  void calculateTotal() {}
 }

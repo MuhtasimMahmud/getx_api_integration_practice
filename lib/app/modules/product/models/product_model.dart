@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class ProductModel {
   final String name;
-  final double price;
+  RxInt price;
   RxInt quantity;
 
   ProductModel(
