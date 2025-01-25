@@ -25,7 +25,7 @@ class CartView extends StatelessWidget {
                 return ListTile(
                   title: Text('${item.name} x ${item.quantity.value}'),
                   subtitle: Obx(() {
-                    return Text('${item.price * item.quantity.value}');
+                    return Text('\$${item.price * item.quantity.value}');
                   }),
                   trailing: IconButton(
                     icon: Icon(Icons.remove_circle_outline),
@@ -38,11 +38,20 @@ class CartView extends StatelessWidget {
             );
           })),
           Obx(() {
-            return Padding(
-              padding: EdgeInsets.all(16.00),
-              child: Text(
-                'Total: \$${cartController.totalAmount.value.toStringAsFixed(2)}',
-                style: TextStyle(fontSize: 24),
+            return Container(
+              margin: EdgeInsets.only(bottom: 80),
+              width: 200,
+              height: 80,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: EdgeInsets.all(16.00),
+                child: Text(
+                  'Total: \$${cartController.totalAmount.value}',
+                  style: TextStyle(fontSize: 24),
+                ),
               ),
             );
           })

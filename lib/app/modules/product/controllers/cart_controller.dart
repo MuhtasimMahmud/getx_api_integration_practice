@@ -15,26 +15,29 @@ class CartController extends GetxController {
     return -1;
   }
 
-  void addToCart(ProductModel product) {
-    int indexOfTheItem = existInTheCart(product);
+  // void addToCart(ProductModel product) {
+  //   cartItems.add(product);
+  //   totalAmount = (totalAmount.value + product.price.value) as RxDouble;
+  // }
 
+  void removeFromCart(ProductModel product) {
+    int indexOfTheItem = existInTheCart(product);
     if (indexOfTheItem != -1) {
-      cartItems[indexOfTheItem].quantity + 1;
-    } else {
-      cartItems.add(product);
+      cartItems[indexOfTheItem].quantity.value--;
+      if (cartItems[indexOfTheItem].quantity.value == 0) {
+        cartItems.remove(product);
+      }
+      totalAmount = (totalAmount.value - product.price.value) as RxDouble;
     }
   }
 
-  void removeFromCart(ProductModel product) {
-    int indexIfExists = existInTheCart(product);
-
-    if (indexIfExists != -1) {
-      cartItems[indexIfExists].quantity - 1;
-      if (cartItems[indexIfExists].quantity.value == 0) {
-        cartItems.remove(cartItems[indexIfExists]);
+  void calculateTotal(List<ProductModel> products) {
+    for (int i = 0; i < products.length; i++) {
+      if (products[i].quantity > 0) {
+        cartItems.add(products[i]);
+        totalAmount.value = totalAmount.value +
+            (products[i].price * products[i].quantity.value);
       }
     }
   }
-
-  void calculateTotal() {}
 }

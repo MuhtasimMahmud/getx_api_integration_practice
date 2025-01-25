@@ -72,7 +72,6 @@ class ProductView extends StatelessWidget {
                                       if (product.quantity > 0) {
                                         product.quantity.value =
                                             (product.quantity - 1).value;
-                                        cartController.removeFromCart(product);
                                       } else {
                                         product.quantity.value = 0;
                                       }
@@ -93,7 +92,6 @@ class ProductView extends StatelessWidget {
                                     onPressed: () {
                                       product.quantity.value =
                                           (product.quantity + 1).value;
-                                      cartController.addToCart(product);
                                     },
                                     icon: Icon(Icons.add)),
                               ],
@@ -122,6 +120,7 @@ class ProductView extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
+                  cartController.calculateTotal(controller.products);
                   Get.toNamed('/cart_view', arguments: controller.products);
                 },
                 child: Text(
